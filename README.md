@@ -1,92 +1,76 @@
-# rt-miscellaneous
+<!-- @defgroup rt-tacle-bench RT-TACLeBench
+@ingroup benchmarks
+@brief The TACLe benchmark collection. -->
 
+# RT-Miscellaneous
 
+This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/md_rt_tacle_bench__r_e_a_d_m_e.html) of RT-Bench for better fruition.
 
-## Getting started
+This module contains a version of [TACLe-Bench](https://github.com/tacle/tacle-bench) adapted to work with the [RT-Bench framework](https://gitlab.com/rt-bench/rt-bench).
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Documentation
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Find the original documentation on the [TACLe-Bench original repository](https://github.com/tacle/tacle-bench/tree/master/doc) and RT-Bench documentation on the [original repository](https://rt-bench.gitlab.io/rt-bench/index.html).
 
-## Add your files
+### Usage
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+This module is registered as a submodule of RT-Bench, from which it also depends.
 
+#### Setup
+
+The suggested way to compile benchmarks in this module requires the user to:
+
+- Clone RT-Bench: `git clone https://gitlab.com/rt-bench/rt-bench.git`.
+- Initialize the submodule by typing, from the RT-Bench root folder `make setup-image-filters`
+
+#### Compilation
+
+Compilation is done from the `rt-image-filters` folder (the module root folder).
+
+To compile the whole suite, you can simply type:
+```{.sh}
+make
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/denishoornaert/rt-miscellaneous.git
-git branch -M main
-git push -uf origin main
+
+Otherwise a single benchmark can be compiled by typing `make` followed by the path to the benchmark.
+For example to compile only the `ammunition` benchmark
+```{.sh}
+make bench/sequential/ammunition/ammunition
 ```
 
-## Integrate with your tools
+Finally, the whole suite can be compiled from the RT-Bench folder by typing:
+```{.sh}
+make compile-image-filters
+```
 
-- [ ] [Set up project integrations](https://gitlab.com/denishoornaert/rt-miscellaneous/-/settings/integrations)
+By default, it will compile for `x86` platform with `gcc` and assumes RT-Bench is the parent folder.
+Append these options to the `make` command to tailor compilation to your needs
 
-## Collaborate with your team
+- ```CC=<compiler>``` for cross-compiling
+- ```RTBENCH_PATH=<path/to/rtbench/repository>``` to specify the location of the RT-bench project/repository used
+- ```CORE=CORTEX_A53``` to enable performance counters features
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### Citing projects
 
-## Test and Deploy
+If you have found this project useful, please consider citing RT-Bench.
 
-Use the built-in continuous integration in GitLab.
+RT-Bench:
+```
+@inproceedings{10.1145/3534879.3534888,
+	author = {Nicolella, Mattia and Roozkhosh, Shahin and Hoornaert, Denis and Bastoni, Andrea and Mancuso, Renato},
+	title = {RT-Bench: An Extensible Benchmark Framework for the Analysis and Management of Real-Time Applications},
+	year = {2022},
+	isbn = {9781450396509},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3534879.3534888},
+	doi = {10.1145/3534879.3534888},
+	booktitle = {Proceedings of the 30th International Conference on Real-Time Networks and Systems},
+	pages = {184–195},
+	numpages = {12},
+	keywords = {portable, framework, real-time, profiling, extensible, periodic, benchmark suite, open-source, interference},
+	location = {Paris, France},
+	series = {RTNS 2022}
+}
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
