@@ -1,6 +1,6 @@
 /**
  * @file common.h
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief All BMP-related manipulation functions and struct.
  * @author Denis Hoornaert
  *

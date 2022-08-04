@@ -1,6 +1,6 @@
 /**
  * @file filters.c
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief Collection of the filter's logic.
  *
  * This allows the benchmark to be run periodically, by re-running only the

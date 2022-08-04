@@ -1,6 +1,6 @@
 /**
  * @file common.c
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief Collection of manipulations on BMP (read, copy, and write).
  *
  * This allows the benchmark to be run periodically, by re-running only the

@@ -1,6 +1,6 @@
 /**
  * @file threshold.c
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief Benchmark running threshold filtering on BMP image.
  * @details
  * The original script has been broken down in three components:

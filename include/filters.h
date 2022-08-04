@@ -1,6 +1,6 @@
 /**
  * @file filters.h
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief Collection of the filters functions.
  * @author Denis Hoornaert
  *
