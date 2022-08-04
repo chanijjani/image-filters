@@ -67,7 +67,28 @@ void sobel(struct bmp_t* img, struct bmp_t* out) {
                     gy += img->data[h+i-1][p+((j-1)*img->depth)]*kv[i][j];
                 }
             }
-            char color = fpmin(fpmax(abs(gx)+abs(gy), 0), 255);
+            char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);
+            out->data[h][p+2] = color;
+            out->data[h][p+1] = color;
+            out->data[h][p+0] = color;
+        }
+    }
+}
+
+void sobel5(struct bmp_t* img, struct bmp_t* out) {
+    int kh[5][5] = {{ 5,  8, 10,  8,  5}, { 4, 10, 20, 10,  4}, { 0,  0,  0,  0,  0}, { -4, -10, -20, -10, -4}, {-5, -8, -10, -8, -5}};
+    int kv[5][5] = {{ 5,  4,  0, -4, -5}, { 8, 10,  0, -10, -8}, {10, 20,  0, -20, -10}, { 8, 10,  0, -10, -8}, { 5,  4,  0, -4, -5}};
+    for (size_t h = 2; h < img->height-2; h++) {
+        for (size_t p = img->depth*2; p < (img->width-2)*img->depth; p+=img->depth) {
+	    int gx = 0;
+            int gy = 0;
+            for (size_t i = 0; i < 5; i++) {
+                for (size_t j = 0; j < 5; j++) {
+                    gx += img->data[h+i-2][p+((j-2)*img->depth)]*kh[i][j];
+                    gy += img->data[h+i-2][p+((j-2)*img->depth)]*kv[i][j];
+                }
+            }
+            char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);
             out->data[h][p+2] = color;
             out->data[h][p+1] = color;
             out->data[h][p+0] = color;

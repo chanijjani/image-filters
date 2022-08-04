@@ -1,4 +1,1 @@
-grayscale.o
-sepia.o
-threshold.o
-sobel.o
+*.o

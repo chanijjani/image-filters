@@ -1,5 +1,5 @@
 CC=gcc
-PGMS=grayscale threshold sepia sobel
+PGMS=grayscale threshold sepia sobel sobel5
 RTBENCH_PATH=../rt-bench
 BASE_SRC=$(wildcard $(RTBENCH_PATH)/generator/*.c)
 BASE_O=$(patsubst %.c,%.o,$(BASE_SRC))
@@ -35,5 +35,8 @@ sepia: src/sepia.o obj/common.o obj/filters.o $(BASE_O)
 sobel: src/sobel.o obj/common.o obj/filters.o $(BASE_O)
 	$(CC) $(CFLAGS) $(LDFLAGS) $< obj/*.o $(BASE_O) -o $@
 
+sobel5: src/sobel5.o obj/common.o obj/filters.o $(BASE_O)
+	$(CC) $(CFLAGS) $(LDFLAGS) $< obj/*.o $(BASE_O) -o $@
+
 clean:
-	rm obj/*.o $(BASE_O)
+	rm obj/*.o src/*.o $(BASE_O)

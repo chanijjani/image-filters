@@ -2,6 +2,7 @@ grayscale
 sepia
 threshold
 sobel
+sobel5
 
 *.bmp
 

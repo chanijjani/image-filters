@@ -51,4 +51,10 @@ void sepia(struct bmp_t* img, struct bmp_t* out);
  */
 void sobel(struct bmp_t* img, struct bmp_t* out);
 
+/** @brief Function applying a sobel filter with 5x5 kernel size on the image given in paramter.
+ * @param[in] img Input image from which the data is read.
+ * @param[in] out Output image in which the filtered image is stored.
+ */
+void sobel5(struct bmp_t* img, struct bmp_t* out);
+
 #endif /* FILTERS_H */
