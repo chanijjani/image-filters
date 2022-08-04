@@ -1,3 +1,15 @@
+/**
+ * @file filters.c
+ * @ingroup rt-image-filters
+ * @brief Collection of the filter's logic.
+ *
+ * This allows the benchmark to be run periodically, by re-running only the
+ * execution portion.
+ *
+ * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ *
+ */
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>

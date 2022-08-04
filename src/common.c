@@ -1,3 +1,15 @@
+/**
+ * @file common.c
+ * @ingroup rt-image-filters
+ * @brief Collection of manipulations on BMP (read, copy, and write).
+ *
+ * This allows the benchmark to be run periodically, by re-running only the
+ * execution portion.
+ *
+ * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ *
+ */
+
 #include "../include/common.h"
 
 struct bmp_t readBMP(const char* file) {
