@@ -35,26 +35,33 @@ void threshold(struct bmp_t* img);
 
 /** @brief Function applying a grayscale filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
- * @param[in] out Output image in which the filtered image is stored.
+ * @param[out] out Output image in which the filtered image is stored.
  */
 void grayscale(struct bmp_t* img, struct bmp_t* out);
 
 /** @brief Function applying a sepia filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
- * @param[in] out Output image in which the filtered image is stored.
+ * @param[out] out Output image in which the filtered image is stored.
  */
 void sepia(struct bmp_t* img, struct bmp_t* out);
 
 /** @brief Function applying a sobel filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
- * @param[in] out Output image in which the filtered image is stored.
+ * @param[out] out Output image in which the filtered image is stored.
  */
 void sobel(struct bmp_t* img, struct bmp_t* out);
 
 /** @brief Function applying a sobel filter with 5x5 kernel size on the image given in paramter.
  * @param[in] img Input image from which the data is read.
- * @param[in] out Output image in which the filtered image is stored.
+ * @param[out] out Output image in which the filtered image is stored.
  */
 void sobel5(struct bmp_t* img, struct bmp_t* out);
+
+/** @brief Function applying a gaussian noise filter with kernel size of 3x3 on 
+ * the image given in paramter.
+ * @param[in] img Input image from which the data is read.
+ * @param[out] out Output image in which the filtered image is stored.
+ */
+void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float conv[size][size]);
 
 #endif /* FILTERS_H */

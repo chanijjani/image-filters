@@ -63,8 +63,8 @@ void sobel(struct bmp_t* img, struct bmp_t* out) {
             int gy = 0;
             for (size_t i = 0; i < 3; i++) {
                 for (size_t j = 0; j < 3; j++) {
-                    gx += img->data[h+i-1][p+((j-1)*img->depth)]*kh[i][j];
-                    gy += img->data[h+i-1][p+((j-1)*img->depth)]*kv[i][j];
+                    gx += img->data[h+(i-1)][p+((j-1)*img->depth)]*kh[i][j];
+                    gy += img->data[h+(i-1)][p+((j-1)*img->depth)]*kv[i][j];
                 }
             }
             char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);
@@ -84,14 +84,29 @@ void sobel5(struct bmp_t* img, struct bmp_t* out) {
             int gy = 0;
             for (size_t i = 0; i < 5; i++) {
                 for (size_t j = 0; j < 5; j++) {
-                    gx += img->data[h+i-2][p+((j-2)*img->depth)]*kh[i][j];
-                    gy += img->data[h+i-2][p+((j-2)*img->depth)]*kv[i][j];
+                    gx += img->data[h+(i-2)][p+((j-2)*img->depth)]*kh[i][j];
+                    gy += img->data[h+(i-2)][p+((j-2)*img->depth)]*kv[i][j];
                 }
             }
             char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);
             out->data[h][p+2] = color;
             out->data[h][p+1] = color;
             out->data[h][p+0] = color;
+        }
+    }
+}
+
+void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float conv[size][size]) {
+    unsigned half_size = size/2;
+    for (size_t h = half_size; h < img->height-half_size; h++) {
+        for (size_t r = img->depth*half_size; r < (img->width-half_size)*img->depth; r++) {
+            int res = 0;
+            for (size_t i = 0; i < size; i++) {
+                for (size_t j = 0; j < size; j++) {
+                    res += img->data[h+(i-half_size)][r+((j-half_size)*img->depth)]*conv[i][j];
+                }
+            }
+            out->data[h][r] = fpmin(fpmax(res, 0), 255);
         }
     }
 }
