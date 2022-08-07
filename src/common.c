@@ -33,6 +33,7 @@ struct bmp_t readBMP(const char* file) {
     for (size_t h = 0; h < img.height; h++) {
         img.data[h] = (uint8_t*)malloc(img.width*img.depth*sizeof(uint8_t));
         fread(img.data[h], sizeof(uint8_t), img.width*img.depth, fp);
+	fseek(fp, img.width%4, SEEK_CUR);
     }
 
     fclose(fp);
@@ -71,8 +72,12 @@ void writeBMP(const char* file, struct bmp_t img) {
     fwrite(img.header, sizeof(uint8_t), 54, fp);
     fwrite(img.header_ext, sizeof(uint8_t), (img.data_offset-54), fp);
 
-    for (size_t h = 0; h < img.height; h++)
+    for (size_t h = 0; h < img.height; h++) {
         fwrite(img.data[h], sizeof(uint8_t), img.width*img.depth, fp);
+	for (size_t pad = 0; pad < img.width%4; pad++) {
+	    fputc(0, fp);
+	}
+    }
 
     fclose(fp);
 }
