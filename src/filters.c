@@ -111,3 +111,45 @@ void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float c
         }
     }
 }
+
+void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta) {
+    for (size_t h = 1; h < img->height-1; h++) {
+        for (size_t p = 1; p < img->width-1; p++) {
+	    // If negative, add PI
+	    theta[h][p] = (theta[h][p] > 0.0)? theta[h][p] : theta[h][p]+M_PI;
+	    // Analyse
+	    uint8_t components[2] = {255, 255};
+	    if ((0 <= theta[h][p]) & (theta[h][p] < M_PI/8.0f)) {
+	        components[0] = img->data[h][(p+1)*img->depth];
+		components[1] = img->data[h][(p-1)*img->depth];
+	    }
+	    else if ((1*M_PI/8.0f <= theta[h][p]) & (theta[h][p] < 3*M_PI/8.0f)) {
+	        components[0] = img->data[h+1][(p-1)*img->depth];
+                components[1] = img->data[h-1][(p+1)*img->depth];
+	    }
+	    else if ((3*M_PI/8.0f <= theta[h][p]) & (theta[h][p] < 5*M_PI/8.0f)) {
+	        components[0] = img->data[h+1][p*img->depth];
+                components[1] = img->data[h-1][p*img->depth];
+	    }
+	    else if ((5*M_PI/8.0f <= theta[h][p]) & (theta[h][p] < 7*M_PI/8.0f)) {
+	        components[0] = img->data[h-1][(p-1)*img->depth];
+                components[1] = img->data[h+1][(p+1)*img->depth];
+	    }
+	    else if ((7*M_PI/8.0f <= theta[h][p]) & (theta[h][p] < M_PI)) {
+	        components[0] = img->data[h][(p+1)*img->depth];
+                components[1] = img->data[h][(p-1)*img->depth];
+	    }
+	    // Write in image
+	    if ((img->data[h][p*img->depth] >= components[0]) & (img->data[h][p*img->depth] >= components[1])) {
+	        out->data[h][(p*img->depth)+2] = img->data[h][(p*img->depth)+2];
+		out->data[h][(p*img->depth)+1] = img->data[h][(p*img->depth)+1];
+		out->data[h][(p*img->depth)+0] = img->data[h][(p*img->depth)+0];
+	    }
+	    else {
+		out->data[h][(p*img->depth)+2] = 0;
+                out->data[h][(p*img->depth)+1] = 0;
+                out->data[h][(p*img->depth)+0] = 0;
+	    }
+	}
+    }
+}

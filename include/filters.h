@@ -57,7 +57,7 @@ void sobel(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][siz
 /** @brief Function applying a sobel filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
  * @param[out] out Output image in which the filtered image is stored.
- * @param[out] theta Out the angle gradient.
+ * @param[out] theta Output the angle gradient.
  * @param[in] size Kernels size.
  * @param[in] kh Horizontal kernel of size `size` by `size`.
  * @param[in] kv Vertical kernel of size `size` by `size`.
@@ -72,5 +72,11 @@ void sobel_gradient(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[
  * @param[in] conv Convolution kernel of size `size` by `size`.
  */
 void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float conv[size][size]);
+
+/** @ Performance non max suppression on sobel image with its accompanying gradient.
+ * @param[inout] img Imgae input from which the data is read.
+ * @param[in] theta Output the angle gradient.
+ */
+void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta);
 
 #endif /* FILTERS_H */

@@ -87,9 +87,11 @@ void benchmark_execution(int parameters_num, void **parameters)
                 {-2,  0,  2},
                 {-1,  0,  1}
         };
+
 	grayscale(&intermediate, &intermediate);
 	gaussian_noise(&intermediate, &target, 5, conv);
 	sobel_gradient(&target, &intermediate, 3, kh, kv, theta);
+	non_max_suppression(&intermediate, &target, theta);
 }
 
 /**
@@ -102,7 +104,7 @@ void benchmark_execution(int parameters_num, void **parameters)
 void benchmark_teardown(int parameters_num, void **parameters)
 {
 	// BMP
-	writeBMP(parameters[1], intermediate);
+	writeBMP(parameters[1], target);
         freeBMP(&source);
 	freeBMP(&target);
 	// Angle gradient
