@@ -112,7 +112,7 @@ void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float c
     }
 }
 
-void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta) {
+void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta, uint8_t* max) {
     for (size_t h = 1; h < img->height-1; h++) {
         for (size_t p = 1; p < img->width-1; p++) {
 	    // If negative, add PI
@@ -150,6 +150,26 @@ void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta) {
                 out->data[h][(p*img->depth)+1] = 0;
                 out->data[h][(p*img->depth)+0] = 0;
 	    }
+	    // Look for max value
+	    if ((*max) < out->data[h][p*img->depth])
+		(*max) = out->data[h][p*img->depth];
+	}
+    }
+}
+
+void double_threshold(struct bmp_t* img, uint8_t* max) {
+    // Threshold
+    float strong_threshold = (*max)*0.225f;
+    float medium_threshold = strong_threshold*0.05f;
+    // Filter
+    for (size_t h = 0; h < img->height; h++) {
+    	for (size_t r = 0; r < img->width*img->depth; r++) {
+	    if (img->data[h][r] >= strong_threshold)
+		img->data[h][r] = 255;
+	    else if (img->data[h][r] < medium_threshold)
+		img->data[h][r] = 0;
+	    else
+		img->data[h][r] = 25;
 	}
     }
 }

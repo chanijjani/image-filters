@@ -70,6 +70,7 @@ int benchmark_init(int parameters_num, void **parameters)
  */
 void benchmark_execution(int parameters_num, void **parameters)
 {
+	uint8_t max = 0;
 	float conv[5][5] = {
 		{0.00291502f, 0.01306423f, 0.02153928f, 0.01306423f, 0.00291502f},
 		{0.01306423f, 0.05854983f, 0.09653235f, 0.05854983f, 0.01306423f},
@@ -91,7 +92,8 @@ void benchmark_execution(int parameters_num, void **parameters)
 	grayscale(&intermediate, &intermediate);
 	gaussian_noise(&intermediate, &target, 5, conv);
 	sobel_gradient(&target, &intermediate, 3, kh, kv, theta);
-	non_max_suppression(&intermediate, &target, theta);
+	non_max_suppression(&intermediate, &target, theta, &max);
+	double_threshold(&target, &max);
 }
 
 /**
