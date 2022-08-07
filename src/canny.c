@@ -1,7 +1,7 @@
 /**
- * @file canny.c
- * @ingroup image-filters
- * @brief Benchmark running canny filtering on BMP image.
+ * @file sobel.c
+ * @ingroup rt-image-filters
+ * @brief Benchmark running sobel filtering on BMP image.
  * @details
  * The original script has been broken down in three components:
  * - init: benchmark_init();
@@ -25,6 +25,9 @@
 /// Struct storing parsed BMP image as read from the file.
 struct bmp_t source;
 
+/// Struct storing an intermediate rpresentation of the image under processing.
+struct bmp_t intermediate;
+
 /// Struct storing the outproduct of the filtering on 'source'.
 struct bmp_t target;
 
@@ -44,14 +47,14 @@ int benchmark_init(int parameters_num, void **parameters)
 		return -1;
 
 	source = readBMP(parameters[0]);
-	grayscale(&source, &source);
 	copyBMP(&source, &target);
+	copyBMP(&source, &intermediate);
 
 	return 0;
 }
 
 /**
- * @brief Applies canny filter on the 'source', writing the outcome in 'target'.
+ * @brief Applies sobel filter on the 'source', writing the outcome in 'target'.
  * @param[in] parameters_num Number of passed parameters, ignored.
  * @param[in] parameters The list of passed parameters, ignored.
  * @details
@@ -59,7 +62,26 @@ int benchmark_init(int parameters_num, void **parameters)
  */
 void benchmark_execution(int parameters_num, void **parameters)
 {
-	canny(&source, &target);
+	float conv[5][5] = {
+		{0.00291502f, 0.01306423f, 0.02153928f, 0.01306423f, 0.00291502f},
+		{0.01306423f, 0.05854983f, 0.09653235f, 0.05854983f, 0.01306423f},
+		{0.02153928f, 0.09653235f, 0.15915494f, 0.09653235f, 0.02153928f},
+		{0.01306423f, 0.05854983f, 0.09653235f, 0.05854983f, 0.01306423f},
+		{0.00291502f, 0.01306423f, 0.02153928f, 0.01306423f, 0.00291502f}
+	};
+	int kh[3][3] = {
+                {-1, -2, -1},
+                { 0,  0,  0},
+                { 1,  2,  1}
+        };
+        int kv[3][3] = {
+                {-1,  0,  1},
+                {-2,  0,  2},
+                {-1,  0,  1}
+        };
+	grayscale(&intermediate, &intermediate);
+	gaussian_noise(&intermediate, &target, 5, conv);
+	sobel(&target, &intermediate, 3, kh, kv);
 }
 
 /**
@@ -71,7 +93,7 @@ void benchmark_execution(int parameters_num, void **parameters)
  */
 void benchmark_teardown(int parameters_num, void **parameters)
 {
-	writeBMP(parameters[1], target);
+	writeBMP(parameters[1], intermediate);
         freeBMP(&source);
 	freeBMP(&target);
 }

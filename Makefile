@@ -1,5 +1,5 @@
 CC=gcc
-PGMS=grayscale threshold sepia sobel sobel5 gaussian_noise3 gaussian_noise5 gaussian_noise7
+PGMS=grayscale threshold sepia sobel sobel5 gaussian_noise3 gaussian_noise5 gaussian_noise7 canny
 RTBENCH_PATH=../rt-bench
 BASE_SRC=$(wildcard $(RTBENCH_PATH)/generator/*.c)
 BASE_O=$(patsubst %.c,%.o,$(BASE_SRC))
@@ -45,6 +45,9 @@ gaussian_noise5: src/gaussian_noise5.o obj/common.o obj/filters.o $(BASE_O)
 	$(CC) $(CFLAGS) $(LDFLAGS) $< obj/*.o $(BASE_O) -o $@
 
 gaussian_noise7: src/gaussian_noise7.o obj/common.o obj/filters.o $(BASE_O)
+	$(CC) $(CFLAGS) $(LDFLAGS) $< obj/*.o $(BASE_O) -o $@
+
+canny: src/canny.o obj/common.o obj/filters.o $(BASE_O)
 	$(CC) $(CFLAGS) $(LDFLAGS) $< obj/*.o $(BASE_O) -o $@
 
 clean:
