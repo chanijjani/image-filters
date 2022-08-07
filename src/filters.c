@@ -74,6 +74,29 @@ void sobel(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][siz
     }
 }
 
+void sobel_gradient(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][size], int kv[size][size], float** theta) {
+    unsigned half_size = size/2;
+    for (size_t h = half_size; h < img->height-half_size; h++) {
+	size_t r = half_size;
+        for (size_t p = img->depth*half_size; p < (img->width-half_size)*img->depth; p+=img->depth) {
+            int gx = 0;
+            int gy = 0;
+            for (size_t i = 0; i < size; i++) {
+                for (size_t j = 0; j < size; j++) {
+                    gx += img->data[h+(i-half_size)][p+((j-half_size)*img->depth)]*kh[i][j];
+                    gy += img->data[h+(i-half_size)][p+((j-half_size)*img->depth)]*kv[i][j];
+                }
+            }
+            char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);
+            out->data[h][p+2] = color;
+            out->data[h][p+1] = color;
+            out->data[h][p+0] = color;
+	    theta[h][r] = atan((double)gx/(double)gy);
+	    r++;
+        }
+    }
+}
+
 void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float conv[size][size]) {
     unsigned half_size = size/2;
     for (size_t h = half_size; h < img->height-half_size; h++) {

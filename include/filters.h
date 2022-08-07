@@ -54,6 +54,16 @@ void sepia(struct bmp_t* img, struct bmp_t* out);
  */
 void sobel(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][size], int kv[size][size]);
 
+/** @brief Function applying a sobel filter on the image given in paramter.
+ * @param[in] img Input image from which the data is read.
+ * @param[out] out Output image in which the filtered image is stored.
+ * @param[out] theta Out the angle gradient.
+ * @param[in] size Kernels size.
+ * @param[in] kh Horizontal kernel of size `size` by `size`.
+ * @param[in] kv Vertical kernel of size `size` by `size`.
+ */
+void sobel_gradient(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][size], int kv[size][size], float** theta);
+
 /** @brief Function applying a gaussian noise filter with kernel size of 3x3 on 
  * the image given in paramter.
  * @param[in] img Input image from which the data is read.

@@ -31,6 +31,9 @@ struct bmp_t intermediate;
 /// Struct storing the outproduct of the filtering on 'source'.
 struct bmp_t target;
 
+/// Struct stores angle gradient.
+float** theta;
+
 /**
  * @brief Reads content of specified BMP file and create a copy.
  * @param[in] parameters_num Number of parameters passed, should be 2.
@@ -46,9 +49,14 @@ int benchmark_init(int parameters_num, void **parameters)
 	if (parameters_num < 2)
 		return -1;
 
+	// BMP
 	source = readBMP(parameters[0]);
 	copyBMP(&source, &target);
 	copyBMP(&source, &intermediate);
+	// Angle gradient
+	theta = (float**)malloc(source.height*sizeof(float*));
+	for (size_t h = 0; h < source.height; h++)
+		theta[h] = (float*)malloc(source.width*sizeof(float));
 
 	return 0;
 }
@@ -81,7 +89,7 @@ void benchmark_execution(int parameters_num, void **parameters)
         };
 	grayscale(&intermediate, &intermediate);
 	gaussian_noise(&intermediate, &target, 5, conv);
-	sobel(&target, &intermediate, 3, kh, kv);
+	sobel_gradient(&target, &intermediate, 3, kh, kv, theta);
 }
 
 /**
@@ -93,7 +101,15 @@ void benchmark_execution(int parameters_num, void **parameters)
  */
 void benchmark_teardown(int parameters_num, void **parameters)
 {
+	// BMP
 	writeBMP(parameters[1], intermediate);
         freeBMP(&source);
 	freeBMP(&target);
+	// Angle gradient
+	for (size_t h = 0; h < source.height; h++) {
+		free(theta[h]);
+		theta[h] = NULL;
+	}
+	free(theta);
+	theta = NULL;
 }
