@@ -26,6 +26,9 @@ struct bmp_t readBMP(const char* file) {
     img.height = img.header[22] | (img.header[23] << 8) | (img.header[24] << 8) | (img.header[25] << 8);
     img.depth = (img.header[28] | (img.header[29] << 8) | (img.header[30] << 8) | (img.header[31] << 8))>>3;
 
+    img.header_ext = (uint8_t*)malloc((img.data_offset-54)*sizeof(uint8_t));
+    fread(img.header_ext, sizeof(uint8_t), (img.data_offset-54), fp);
+
     img.data = (uint8_t**)malloc(img.height*sizeof(uint8_t*));
     for (size_t h = 0; h < img.height; h++) {
         img.data[h] = (uint8_t*)malloc(img.width*img.depth*sizeof(uint8_t));
@@ -47,13 +50,18 @@ void copyBMP(struct bmp_t* img, struct bmp_t* out) {
     out->header = (uint8_t*)malloc(54*sizeof(uint8_t));
     for (size_t e = 0; e < 54; e++)
         out->header[e] = img->header[e];
+    // Handling header ext
+    out->header_ext = (uint8_t*)malloc((img->data_offset-54)*sizeof(uint8_t));
+    for (size_t e = 0; e < (img->data_offset-54); e++)
+        out->header_ext[e] = img->header_ext[e];
     // Handling data
     out->data = (uint8_t**)malloc(img->height*sizeof(uint8_t*));
-    for (size_t h = 0; h < img->height; h++)
+    for (size_t h = 0; h < img->height; h++) {
         out->data[h] = (uint8_t*)malloc(img->width*img->depth*sizeof(uint8_t));
-    for (size_t h = 0; h < img->height; h++) // TODO: memcpy
-        for (size_t r = 0; r < img->width*img->depth; r++)
+        for (size_t r = 0; r < img->width*img->depth; r++) {
             out->data[h][r] = img->data[h][r];
+	}
+    }
 }
 
 void writeBMP(const char* file, struct bmp_t img) {
@@ -61,6 +69,7 @@ void writeBMP(const char* file, struct bmp_t img) {
 
     fp = fopen(file, "wb");
     fwrite(img.header, sizeof(uint8_t), 54, fp);
+    fwrite(img.header_ext, sizeof(uint8_t), (img.data_offset-54), fp);
 
     for (size_t h = 0; h < img.height; h++)
         fwrite(img.data[h], sizeof(uint8_t), img.width*img.depth, fp);
@@ -69,6 +78,13 @@ void writeBMP(const char* file, struct bmp_t img) {
 }
 
 void freeBMP(struct bmp_t* img) {
+    // Header
+    free(img->header);
+    img->header = NULL;
+    // Header extension
+    free(img->header_ext);
+    img->header_ext = NULL;
+    // Data
     for (size_t h = 0; h < img->height; h++) {
         free(img->data[h]);
         img->data[h] = NULL;

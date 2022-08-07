@@ -28,7 +28,8 @@ struct bmp_t {
     uint32_t width; ///< The width in pixels of the image
     uint32_t height; ///, The height in pixels of the image
     uint16_t depth; ///< The size in bytes of each pixel
-    uint8_t* header; ///< Raw BMP header
+    uint8_t* header; ///< Raw BMP header (fixed in format definition)
+    uint8_t* header_ext; ///< RAW BMP header extension (dynamic, input dependent)
     uint8_t** data; ///< Payload storing the image's pixels
 };
 
