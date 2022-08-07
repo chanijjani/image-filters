@@ -54,38 +54,16 @@ void sepia(struct bmp_t* img, struct bmp_t* out) {
     }
 }
 
-void sobel(struct bmp_t* img, struct bmp_t* out) {
-    int kh[3][3] = {{-1, -2, -1},  {0, 0, 0}, { 1, 2, 1}};
-    int kv[3][3] = {{-1,  0,  1}, {-2, 0, 2}, {-1, 0, 1}};
-    for (size_t h = 1; h < img->height-1; h++) {
-        for (size_t p = img->depth; p < (img->width-1)*img->depth; p+=img->depth) {
-            int gx = 0;
-            int gy = 0;
-            for (size_t i = 0; i < 3; i++) {
-                for (size_t j = 0; j < 3; j++) {
-                    gx += img->data[h+(i-1)][p+((j-1)*img->depth)]*kh[i][j];
-                    gy += img->data[h+(i-1)][p+((j-1)*img->depth)]*kv[i][j];
-                }
-            }
-            char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);
-            out->data[h][p+2] = color;
-            out->data[h][p+1] = color;
-            out->data[h][p+0] = color;
-        }
-    }
-}
-
-void sobel5(struct bmp_t* img, struct bmp_t* out) {
-    int kh[5][5] = {{ 5,  8, 10,  8,  5}, { 4, 10, 20, 10,  4}, { 0,  0,  0,  0,  0}, { -4, -10, -20, -10, -4}, {-5, -8, -10, -8, -5}};
-    int kv[5][5] = {{ 5,  4,  0, -4, -5}, { 8, 10,  0, -10, -8}, {10, 20,  0, -20, -10}, { 8, 10,  0, -10, -8}, { 5,  4,  0, -4, -5}};
-    for (size_t h = 2; h < img->height-2; h++) {
-        for (size_t p = img->depth*2; p < (img->width-2)*img->depth; p+=img->depth) {
+void sobel(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][size], int kv[size][size]) {
+    unsigned half_size = size/2;
+    for (size_t h = half_size; h < img->height-half_size; h++) {
+        for (size_t p = img->depth*half_size; p < (img->width-half_size)*img->depth; p+=img->depth) {
 	    int gx = 0;
             int gy = 0;
-            for (size_t i = 0; i < 5; i++) {
-                for (size_t j = 0; j < 5; j++) {
-                    gx += img->data[h+(i-2)][p+((j-2)*img->depth)]*kh[i][j];
-                    gy += img->data[h+(i-2)][p+((j-2)*img->depth)]*kv[i][j];
+            for (size_t i = 0; i < size; i++) {
+                for (size_t j = 0; j < size; j++) {
+                    gx += img->data[h+(i-half_size)][p+((j-half_size)*img->depth)]*kh[i][j];
+                    gy += img->data[h+(i-half_size)][p+((j-half_size)*img->depth)]*kv[i][j];
                 }
             }
             char color = fpmin(fpmax(sqrt(pow(gx, 2)+pow(gy, 2)), 0), 255);

@@ -59,7 +59,21 @@ int benchmark_init(int parameters_num, void **parameters)
  */
 void benchmark_execution(int parameters_num, void **parameters)
 {
-	sobel5(&source, &target);
+	int kh[5][5] = {
+		{   5,   8,  10,   8,   5},
+		{   4,  10,  20,  10,   4},
+		{   0,   0,   0,   0,   0},
+		{  -4, -10, -20, -10,  -4},
+		{  -5,  -8, -10,  -8,  -5}
+	};
+	int kv[5][5] = {
+		{   5,   4,   0,  -4,  -5},
+		{   8,  10,   0, -10,  -8},
+		{  10,  20,   0, -20, -10},
+		{   8,  10,   0, -10,  -8},
+		{   5,   4,   0,  -4,  -5}
+	};
+	sobel(&source, &target, 5, kh, kv);
 }
 
 /**
