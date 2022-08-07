@@ -94,6 +94,7 @@ void benchmark_execution(int parameters_num, void **parameters)
 	sobel_gradient(&target, &intermediate, 3, kh, kv, theta);
 	non_max_suppression(&intermediate, &target, theta, &max);
 	double_threshold(&target, &max);
+	edge_tracking(&target, &intermediate);
 }
 
 /**
@@ -106,7 +107,7 @@ void benchmark_execution(int parameters_num, void **parameters)
 void benchmark_teardown(int parameters_num, void **parameters)
 {
 	// BMP
-	writeBMP(parameters[1], target);
+	writeBMP(parameters[1], intermediate);
         freeBMP(&source);
 	freeBMP(&target);
 	// Angle gradient

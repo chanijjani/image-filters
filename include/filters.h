@@ -73,7 +73,7 @@ void sobel_gradient(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[
  */
 void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float conv[size][size]);
 
-/** @Perform max suppression on sobel image with its accompanying gradient.
+/** @brief Perform max suppression on sobel image with its accompanying gradient.
  * @param[in] img Image input from which the data is read.
  * @param[out] out Output image in which the filtered image is stored.
  * @param[in] theta Output the angle gradient.
@@ -81,10 +81,16 @@ void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float c
  */
 void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta, uint8_t* max);
 
-/** @Apply double threshold filtering on input image
+/** @brief Apply double threshold filtering on input image
  * @param[inout] img Image input from which the data is read.
  * @param[in] max Maximal value in `img`.
  */
 void double_threshold(struct bmp_t* img, uint8_t* max);
+
+/** @brief Highlights edges in input image.
+ * @param[in] img Image input from which the data is read.
+ * @param[out] out Output image in which the filtered image is stored.
+ */
+void edge_tracking(struct bmp_t* img, struct bmp_t* out);
 
 #endif /* FILTERS_H */

@@ -173,3 +173,24 @@ void double_threshold(struct bmp_t* img, uint8_t* max) {
 	}
     }
 }
+
+void edge_tracking(struct bmp_t* img, struct bmp_t* out) {
+    unsigned size = 3;
+    unsigned half_size = size/2;
+    // Filter
+    for (size_t h = 1; h < img->height-1; h++) {
+        for (size_t p = img->depth; p < (img->width-1)*img->depth; p+=img->depth) {
+	    uint8_t neighbourhood = 0;
+	    for (size_t i = 0; (i < size) & (neighbourhood != 255); i++) {
+                for (size_t j = 0; (j < size) & (neighbourhood != 255); j++) {
+		    if (i != j) {
+                        neighbourhood = img->data[h+(i-half_size)][p+((j-half_size)*img->depth)];
+		    }
+                }
+            }
+            out->data[h][p+2] = (neighbourhood == 255)? 255 : 0;
+	    out->data[h][p+1] = (neighbourhood == 255)? 255 : 0;
+	    out->data[h][p+0] = (neighbourhood == 255)? 255 : 0;
+	}
+    }
+}
