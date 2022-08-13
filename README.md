@@ -33,9 +33,9 @@ make
 ```
 
 Otherwise a single benchmark can be compiled by typing `make` followed by the path to the benchmark.
-For example to compile only the `ammunition` benchmark
+For example to compile only the `grayscale` benchmark
 ```{.sh}
-make bench/sequential/ammunition/ammunition
+make grayscale
 ```
 
 Finally, the whole suite can be compiled from the RT-Bench folder by typing:
@@ -49,6 +49,14 @@ Append these options to the `make` command to tailor compilation to your needs
 - ```CC=<compiler>``` for cross-compiling
 - ```RTBENCH_PATH=<path/to/rtbench/repository>``` to specify the location of the RT-bench project/repository used
 - ```CORE=CORTEX_A53``` to enable performance counters features
+
+#### Example
+
+All benchmark in `image-filters` take two arguments: (1) the path to the input BMP image, and (2) the path to the output BMP image.
+For instance, the canny filter can be launch as follows
+```{.sh}
+./canny -d 1 -p 1 -b "inputs/vga.bmp canny.bmp"
+```
 
 ### Citing projects
 
