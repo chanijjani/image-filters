@@ -1,6 +1,6 @@
 /**
  * @file filters.h
- * @ingroup image-filters
+ * @ingroup rt-image-filters
  * @brief Collection of the filters functions.
  * @author Denis Hoornaert
  *
@@ -31,19 +31,19 @@ int fpmin(float a, float b);
  * on the image given in parameter.
  * @param[inout] img Pointer of `bmp_t` on which the filter will be applied.
  */
-void threshold(struct bmp_t* img);
+void threshold(struct bmp_t *img);
 
 /** @brief Function applying a grayscale filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
  * @param[out] out Output image in which the filtered image is stored.
  */
-void grayscale(struct bmp_t* img, struct bmp_t* out);
+void grayscale(struct bmp_t *img, struct bmp_t *out);
 
 /** @brief Function applying a sepia filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
  * @param[out] out Output image in which the filtered image is stored.
  */
-void sepia(struct bmp_t* img, struct bmp_t* out);
+void sepia(struct bmp_t *img, struct bmp_t *out);
 
 /** @brief Function applying a sobel filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
@@ -52,7 +52,8 @@ void sepia(struct bmp_t* img, struct bmp_t* out);
  * @param[in] kh Horizontal kernel of size `size` by `size`.
  * @param[in] kv Vertical kernel of size `size` by `size`.
  */
-void sobel(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][size], int kv[size][size]);
+void sobel(struct bmp_t *img, struct bmp_t *out, unsigned size,
+	   int kh[size][size], int kv[size][size]);
 
 /** @brief Function applying a sobel filter on the image given in paramter.
  * @param[in] img Input image from which the data is read.
@@ -62,7 +63,8 @@ void sobel(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][siz
  * @param[in] kh Horizontal kernel of size `size` by `size`.
  * @param[in] kv Vertical kernel of size `size` by `size`.
  */
-void sobel_gradient(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[size][size], int kv[size][size], float** theta);
+void sobel_gradient(struct bmp_t *img, struct bmp_t *out, unsigned size,
+		    int kh[size][size], int kv[size][size], float **theta);
 
 /** @brief Function applying a gaussian noise filter with kernel size of 3x3 on 
  * the image given in paramter.
@@ -71,7 +73,8 @@ void sobel_gradient(struct bmp_t* img, struct bmp_t* out, unsigned size, int kh[
  * @param[in] size Kernal size.
  * @param[in] conv Convolution kernel of size `size` by `size`.
  */
-void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float conv[size][size]);
+void gaussian_noise(struct bmp_t *img, struct bmp_t *out, unsigned size,
+		    float conv[size][size]);
 
 /** @brief Perform max suppression on sobel image with its accompanying gradient.
  * @param[in] img Image input from which the data is read.
@@ -79,18 +82,19 @@ void gaussian_noise(struct bmp_t* img, struct bmp_t* out, unsigned size, float c
  * @param[in] theta Output the angle gradient.
  * @param[out] max Maximal value in `out`.
  */
-void non_max_suppression(struct bmp_t* img, struct bmp_t* out, float** theta, uint8_t* max);
+void non_max_suppression(struct bmp_t *img, struct bmp_t *out, float **theta,
+			 uint8_t *max);
 
 /** @brief Apply double threshold filtering on input image
  * @param[inout] img Image input from which the data is read.
  * @param[in] max Maximal value in `img`.
  */
-void double_threshold(struct bmp_t* img, uint8_t* max);
+void double_threshold(struct bmp_t *img, uint8_t *max);
 
 /** @brief Highlights edges in input image.
  * @param[in] img Image input from which the data is read.
  * @param[out] out Output image in which the filtered image is stored.
  */
-void edge_tracking(struct bmp_t* img, struct bmp_t* out);
+void edge_tracking(struct bmp_t *img, struct bmp_t *out);
 
 #endif /* FILTERS_H */

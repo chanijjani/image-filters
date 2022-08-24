@@ -2,6 +2,7 @@
  * @file sobel.c
  * @ingroup rt-image-filters
  * @brief Benchmark running sobel filtering on BMP image.
+ * @author Denis Hoornaert <denis.hoornaert@tum.de>
  * @details
  * The original script has been broken down in three components:
  * - init: benchmark_init();
@@ -11,7 +12,8 @@
  * This allows the benchmark to be run periodically, by re-running only the
  * execution portion.
  *
- * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ * @copyright (C) 2022 Denis Hoornaert <denis.hoornaert@tum.de>
+ * SPDX-License-Identifier: MIT
  *
  */
 
@@ -59,16 +61,8 @@ int benchmark_init(int parameters_num, void **parameters)
  */
 void benchmark_execution(int parameters_num, void **parameters)
 {
-	int kh[3][3] = {
-		{-1, -2, -1},
-		{ 0,  0,  0},
-		{ 1,  2,  1}
-	};
-	int kv[3][3] = {
-		{-1,  0,  1},
-		{-2,  0,  2},
-		{-1,  0,  1}
-	};
+	int kh[3][3] = { { -1, -2, -1 }, { 0, 0, 0 }, { 1, 2, 1 } };
+	int kv[3][3] = { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
 	sobel(&source, &target, 3, kh, kv);
 }
 
@@ -82,6 +76,6 @@ void benchmark_execution(int parameters_num, void **parameters)
 void benchmark_teardown(int parameters_num, void **parameters)
 {
 	writeBMP(parameters[1], target);
-        freeBMP(&source);
+	freeBMP(&source);
 	freeBMP(&target);
 }
