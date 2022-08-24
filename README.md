@@ -1,6 +1,6 @@
-<!-- @defgroup rt-tacle-bench RT-TACLeBench
+<!-- @defgroup rt-image-filters RT Image filters
 @ingroup benchmarks
-@brief The TACLe benchmark collection. -->
+@brief Real time image filters. -->
 
 # RT-Miscellaneous
 
@@ -82,3 +82,6 @@ RT-Bench:
 }
 ```
 
+<!-- @author Denis Hoornaert, for the current file only.
+@copyright This file is under the SPDX-License-Identifier: MIT
+Individual benchmarks are subject to their original license, specified in each file. -->
