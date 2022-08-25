@@ -1,7 +1,8 @@
 /**
- * @file sobel.c
- * @ingroup rt-image-filters
- * @brief Benchmark running sobel filtering on BMP image.
+ * @file gaussian_noise3.c
+ * @ingroup image-filters
+ * @brief Benchmark running gaussian noise filtering with 3x3 kernel size on BMP image.
+ * @author Denis Hoornaert <denis.hoornaert@tum.de>
  * @details
  * The original script has been broken down in three components:
  * - init: benchmark_init();
@@ -11,7 +12,8 @@
  * This allows the benchmark to be run periodically, by re-running only the
  * execution portion.
  *
- * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ * @copyright (C) 2022 Denis Hoornaert <denis.hoornaert@tum.de>
+ * SPDX-License-Identifier: MIT
  *
  */
 

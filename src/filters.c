@@ -1,12 +1,14 @@
 /**
  * @file filters.c
  * @ingroup image-filters
- * @brief Collection of the filter's logic.
+ * @author Denis Hoornaert <denis.hoornaert@tum.de>
+ * @brief Collection of the filters logic.
  *
  * This allows the benchmark to be run periodically, by re-running only the
  * execution portion.
  *
- * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ * @copyright (C) 2022 Denis Hoornaert <denis.hoornaert@tum.de>
+ * SPDX-License-Identifier: MIT
  *
  */
 

@@ -1,6 +1,6 @@
 /**
  * @file sobel.c
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief Benchmark running sobel filtering on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>
  * @details

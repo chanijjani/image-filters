@@ -2,6 +2,7 @@
  * @file threshold.c
  * @ingroup image-filters
  * @brief Benchmark running threshold filtering on BMP image.
+ * @author Denis Hoornaert <denis.hoornaert@tum.de>
  * @details
  * The original script has been broken down in three components:
  * - init: benchmark_init();
@@ -11,7 +12,8 @@
  * This allows the benchmark to be run periodically, by re-running only the
  * execution portion.
  *
- * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ * @copyright (C) 2022 Denis Hoornaert <denis.hoornaert@tum.de>
+ * SPDX-License-Identifier: MIT
  *
  */
 

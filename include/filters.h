@@ -1,10 +1,10 @@
 /**
  * @file filters.h
- * @ingroup rt-image-filters
+ * @ingroup image-filters
  * @brief Collection of the filters functions.
- * @author Denis Hoornaert
+ * @author Denis Hoornaert <denis.hoornaert@tum.de>
  *
- * Copyright (C) 2021 - 2022, Denis Hoornaert <denis.hoornaert@tum.de>.
+ * @copyright (C) 2022 Denis Hoornaert <denis.hoornaert@tum.de>
  * SPDX-License-Identifier: MIT
 */
 

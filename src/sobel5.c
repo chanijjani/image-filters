@@ -1,7 +1,7 @@
 /**
- * @file sobel.c
- * @ingroup rt-image-filters
- * @brief Benchmark running sobel filtering on BMP image.
+ * @file sobel5.c
+ * @ingroup image-filters
+ * @brief Benchmark running sobel filtering on BMP image with 5x5 kenel size.
  * @details
  * The original script has been broken down in three components:
  * - init: benchmark_init();
@@ -11,7 +11,8 @@
  * This allows the benchmark to be run periodically, by re-running only the
  * execution portion.
  *
- * Copyright (C) 2022 @author Denis Hoornaert <denis.hoornaert@tum.de>
+ * @copyright (C) 2022 Denis Hoornaert <denis.hoornaert@tum.de>
+ * SPDX-License-Identifier: MIT
  *
  */
 
