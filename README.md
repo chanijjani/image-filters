@@ -4,7 +4,7 @@
 
 # Image filters
 
-This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/md_rt_tacle_bench__r_e_a_d_m_e.html) of RT-Bench for better fruition.
+This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/group__image-filters.html) of RT-Bench for better fruition.
 
 ### Documentation
 

@@ -2,6 +2,7 @@
  * @file sobel5.c
  * @ingroup image-filters
  * @brief Benchmark running sobel filtering on BMP image with 5x5 kenel size.
+ * @author Denis Hoornaert <denis.hoornaert@tum.de>
  * @details
  * The original script has been broken down in three components:
  * - init: benchmark_init();
@@ -60,20 +61,16 @@ int benchmark_init(int parameters_num, void **parameters)
  */
 void benchmark_execution(int parameters_num, void **parameters)
 {
-	int kh[5][5] = {
-		{   5,   8,  10,   8,   5},
-		{   4,  10,  20,  10,   4},
-		{   0,   0,   0,   0,   0},
-		{  -4, -10, -20, -10,  -4},
-		{  -5,  -8, -10,  -8,  -5}
-	};
-	int kv[5][5] = {
-		{   5,   4,   0,  -4,  -5},
-		{   8,  10,   0, -10,  -8},
-		{  10,  20,   0, -20, -10},
-		{   8,  10,   0, -10,  -8},
-		{   5,   4,   0,  -4,  -5}
-	};
+	int kh[5][5] = { { 5, 8, 10, 8, 5 },
+			 { 4, 10, 20, 10, 4 },
+			 { 0, 0, 0, 0, 0 },
+			 { -4, -10, -20, -10, -4 },
+			 { -5, -8, -10, -8, -5 } };
+	int kv[5][5] = { { 5, 4, 0, -4, -5 },
+			 { 8, 10, 0, -10, -8 },
+			 { 10, 20, 0, -20, -10 },
+			 { 8, 10, 0, -10, -8 },
+			 { 5, 4, 0, -4, -5 } };
 	sobel(&source, &target, 5, kh, kv);
 }
 
@@ -87,6 +84,6 @@ void benchmark_execution(int parameters_num, void **parameters)
 void benchmark_teardown(int parameters_num, void **parameters)
 {
 	writeBMP(parameters[1], target);
-        freeBMP(&source);
+	freeBMP(&source);
 	freeBMP(&target);
 }
