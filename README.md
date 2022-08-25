@@ -1,16 +1,14 @@
-<!-- @defgroup rt-image-filters RT Image filters
+<!-- @defgroup image-filters Image filters
 @ingroup benchmarks
-@brief Real time image filters. -->
+@brief Image filters. -->
 
-# RT-Miscellaneous
+# Image filters
 
 This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/md_rt_tacle_bench__r_e_a_d_m_e.html) of RT-Bench for better fruition.
 
-This module contains a version of [TACLe-Bench](https://github.com/tacle/tacle-bench) adapted to work with the [RT-Bench framework](https://gitlab.com/rt-bench/rt-bench).
-
 ### Documentation
 
-Find the original documentation on the [TACLe-Bench original repository](https://github.com/tacle/tacle-bench/tree/master/doc) and RT-Bench documentation on the [original repository](https://rt-bench.gitlab.io/rt-bench/index.html).
+Find the full documentation on the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/index.html).
 
 ### Usage
 
@@ -25,7 +23,7 @@ The suggested way to compile benchmarks in this module requires the user to:
 
 #### Compilation
 
-Compilation is done from the `rt-image-filters` folder (the module root folder).
+Compilation is done from the `image-filters` folder (the module root folder).
 
 To compile the whole suite, you can simply type:
 ```{.sh}
@@ -38,17 +36,19 @@ For example to compile only the `grayscale` benchmark
 make grayscale
 ```
 
-Finally, the whole suite can be compiled from the RT-Bench folder by typing:
+Finally, the whole suite can be compiled directly from the RT-Bench root folder by typing:
 ```{.sh}
 make compile-image-filters
 ```
 
-By default, it will compile for `x86` platform with `gcc` and assumes RT-Bench is the parent folder.
+By default, it will compile for the ISA of the platform in use (i.e., call to `gcc`) and assumes RT-Bench is the parent folder.
 Append these options to the `make` command to tailor compilation to your needs
 
 - ```CC=<compiler>``` for cross-compiling
 - ```RTBENCH_PATH=<path/to/rtbench/repository>``` to specify the location of the RT-bench project/repository used
-- ```CORE=CORTEX_A53``` to enable performance counters features
+- ```CORE=<core-model>``` to enable performance counters features
+
+See the compilation flags guide in the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/compilation.html) for further details.
 
 #### Example
 
