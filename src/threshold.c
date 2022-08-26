@@ -1,5 +1,6 @@
 /**
  * @file threshold.c
+ * @defgroup threshold Threshold
  * @ingroup image-filters
  * @brief Benchmark running threshold filtering on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

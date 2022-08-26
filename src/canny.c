@@ -1,5 +1,6 @@
 /**
  * @file canny.c
+ * @defgroup canny Canny
  * @ingroup image-filters
  * @brief Benchmark running canny filtering on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

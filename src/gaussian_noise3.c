@@ -1,5 +1,6 @@
 /**
  * @file gaussian_noise3.c
+ * @defgroup gaussian_noise3 Gaussian_noise3
  * @ingroup image-filters
  * @brief Benchmark running gaussian noise filtering with 3x3 kernel size on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

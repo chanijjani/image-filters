@@ -1,5 +1,6 @@
 /**
  * @file gaussian_noise5.c
+ * @defgroup gaussian_noise5 Gaussian_noise5
  * @ingroup image-filters
  * @brief Benchmark running gaussian_noise filtering with 5x5 kernel size on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

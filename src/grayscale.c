@@ -1,5 +1,6 @@
 /**
  * @file grayscale.c
+ * @defgroup grayscale Grayscale
  * @ingroup image-filters
  * @brief Benchmark running grayscale filtering on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

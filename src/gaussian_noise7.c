@@ -1,5 +1,6 @@
 /**
  * @file gaussian_noise7.c
+ * @defgroup gaussian_noise Gaussian_noise7
  * @ingroup image-filters
  * @brief Benchmark running gaussian noise filtering with 7x7 kernel size on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

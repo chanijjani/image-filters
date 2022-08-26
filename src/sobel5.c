@@ -1,5 +1,6 @@
 /**
  * @file sobel5.c
+ * @defgroup sobel5 Sobel5
  * @ingroup image-filters
  * @brief Benchmark running sobel filtering on BMP image with 5x5 kenel size.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>

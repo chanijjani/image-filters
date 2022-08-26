@@ -1,5 +1,6 @@
 /**
  * @file sepia.c
+ * @defgroup sepia Sepia
  * @ingroup image-filters
  * @brief Benchmark running sepia filtering on BMP image.
  * @author Denis Hoornaert <denis.hoornaert@tum.de>
