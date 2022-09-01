@@ -5,9 +5,9 @@ CC=gcc
 PGMS=grayscale threshold sepia sobel sobel5 gaussian_noise3 gaussian_noise5 gaussian_noise7 canny
 BASE_SRC=$(wildcard $(RTBENCH_PATH)/generator/*.c)
 BASE_O=$(patsubst %.c,%.o,$(BASE_SRC))
-CFLAGS=-O2 -Wall -g -I$(RTBENCH_PATH)/generator -DGCC
+override CFLAGS+=-O2 -Wall -g -I$(RTBENCH_PATH)/generator -DGCC
 CXXFLAGS=$(CFLAGS)
-LDFLAGS=-Wl,--no-as-needed
+override LDFLAGS+=-Wl,--no-as-needed
 
 all: $(PGMS)
 
