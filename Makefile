@@ -45,4 +45,4 @@ canny: src/canny.o obj/common.o obj/filters.o $(BASE_O)
 	$(CC) $(CFLAGS) $< obj/*.o $(BASE_O) -o $@ $(LDFLAGS)
 
 clean:
-	rm obj/*.o src/*.o $(BASE_O)
+	rm -f obj/*.o src/*.o $(BASE_O)
