@@ -6,15 +6,15 @@
 
 This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/group__image-filters.html) of RT-Bench for better fruition.
 
-### Documentation
+## Documentation
 
 Find the full documentation on the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/index.html).
 
-### Usage
+## Usage
 
 This module is registered as a submodule of RT-Bench, from which it also depends.
 
-#### Setup
+### Setup
 
 The suggested way to compile benchmarks in this module requires the user to:
 
@@ -50,7 +50,7 @@ Append these options to the `make` command to tailor compilation to your needs
 
 See the compilation flags guide in the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/compilation.html) for further details.
 
-#### Example
+### Example
 
 All benchmark in `image-filters` take two arguments: (1) the path to the input BMP image, and (2) the path to the output BMP image.
 For instance, the canny filter can be launch as follows
