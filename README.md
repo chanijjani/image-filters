@@ -4,11 +4,11 @@
 
 # Image filters
 
-This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/group__image-filters.html) of RT-Bench for better fruition.
+This page should be read from the corresponding [documentation page](https://rt-bench.gitlab.io/rt-bench/branch/main/group__image-filters.html) of RT-Bench for better fruition.
 
 ## Documentation
 
-Find the full documentation on the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/index.html).
+Find the full documentation on the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/branch/main/index.html).
 
 ## Usage
 
@@ -48,7 +48,7 @@ Append these options to the `make` command to tailor compilation to your needs
 - ```RTBENCH_PATH=<path/to/rtbench/repository>``` to specify the location of the RT-bench project/repository used
 - ```CORE=<core-model>``` to enable performance counters features
 
-See the compilation flags guide in the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/compilation.html) for further details.
+See the compilation flags guide in the [RT-Bench wiki](https://rt-bench.gitlab.io/rt-bench/branch/main/compilation.html) for further details.
 
 ### Example
 
